@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import com.spring.domain.BoardVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.PageDTO;
 import com.spring.service.BoardService;
+import com.spring.service.ReplyService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,7 +27,11 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardController {
 
+	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	@GetMapping("/register")
 	public void registerGET() {
@@ -142,5 +148,12 @@ public class BoardController {
 	}
 	
 
+	//게시글 상세 보기, 댓글 목록
+	/*@PreAuthorize("isAuthenticated()")
+	@RequestMapping("/boardView")
+	public String getBoard(int bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		service.getTotal(cri);
+		
+	}*/
 	
 }
