@@ -38,7 +38,7 @@ public class BoardController {
 
 	}
 
-
+	
 	/*@GetMapping("/list")
 	public void list(Model model) {
 	
@@ -46,14 +46,8 @@ public class BoardController {
 	model.addAttribute("list", service.getList());
 	}*/
 
-	// @GetMapping("/list")
-	// public void list(Criteria cri, Model model) {
-	//
-	// log.info("list: " + cri);
-	// model.addAttribute("list", service.getList(cri));
-	//
-	// }
-
+	
+	//기존 BoardController의 list()는 아무런 파라미터 없이 처리되었기 때문애 pageNum과 amount를 처리하기 위해 수정
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 

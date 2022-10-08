@@ -94,7 +94,7 @@ public class BoardMapperTests {
 		Criteria cri = new Criteria();
 		
 	    
-	    cri.setPageNum(1);	//1페이
+	    cri.setPageNum(1);	//1페이지 
 	    cri.setAmount(10);	//전체 데이터 출력  
 
 
