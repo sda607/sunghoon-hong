@@ -60,7 +60,7 @@ public class BoardControllerTests {
 
 	}
 
-	/*@Test
+	@Test
 	public void tetGet() throws Exception {
 
 		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/get").param("bno", "2")).andReturn()
@@ -96,7 +96,7 @@ public class BoardControllerTests {
 				.param("pageNum", "2")
 				.param("amount", "50"))
 				.andReturn().getModelAndView().getModelMap());
-	}*/
+	}
 
 }
 

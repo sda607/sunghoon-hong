@@ -33,15 +33,18 @@
                                 <tbody>
                                 <c:forEach items="${list}" var="board">
                                     <tr class="odd gradeX">
-                                        <td>${board.bno}</td>
-                                        <td><a class='move' href='<c:out value="${board.bno}" />'><c:out value="${board.title}" /></a></td>
-                                        <td>${board.writer}</td>
-                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
-                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}" /></td>
+                                        <td><c:out value="${board.bno}"/></td>
+                                        <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+                                        <c:out value="${board.title}"/></a></td>
+                                        <td><c:out value="${board.writer}"/></td>
+                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
+                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}"/></td>
                                     </tr>
                                  </c:forEach>
                                 </tbody>
                             </table>
+                           <!--   <td><a class='move' href='<c:out value="${board.bno}" />'><c:out value="${board.title}" /></a></td>-->
+                                	<!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                             <!-- /.table-responsive -->
                        		<form id="searchForm" action="/board/list" method="get">
                        			<select name="type">		<!-- 검색조건과 키워드 보여주는 부분  -->
@@ -101,13 +104,14 @@
                 <!-- /.col-lg-12 -->
             </div>
           	<!-- row -->
-          	
+      
           	<!-- 모달창 -->
 			<div id="myModal" class="modal" tabindex="-1" role="dialog" >
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title">Modal title</h5>
+			       
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
@@ -125,20 +129,23 @@
           	
           <script>
           	$(document).ready(function(){
-          		
+          		//재전송(redirect)처리 
           		var result = '<c:out value="${result}"/>';
           		
           		checkModal(result);
           		
+          		history.replaceState({}, null, null);
+          		
+          		//모달(Modal)창 보여주기 - 목록에서 버튼으로 이동하기  
           		function checkModal(result){
-          			if(result == '' || history.state){
+          			
+          			if(result === '' || history.state){
           				return;
           			}
           			
-          			if(result == 'success'){
-          				$(".modal-body").html("정상적으로 처리되었습니다.");
-          			}else if(parseInt(result) > 0){
-          				$(".modal-body").html("게시글" + parseInt(result) + " 번이 등록되었습니다.");
+          			if(parseInt(result) > 0){
+          				$(".modal-body").html(
+       						"게시글 " + parseInt(result) + " 번이 등록되었습니다.");
           			}
           			
           			$("#myModal").modal("show");
