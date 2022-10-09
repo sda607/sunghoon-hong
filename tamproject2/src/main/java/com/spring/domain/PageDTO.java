@@ -7,15 +7,15 @@ import lombok.ToString;
 @ToString
 public class PageDTO {
 
-  private int startPage;
-  private int endPage;
-  private boolean prev, next;
+  private int startPage;		//시작 페이지 
+  private int endPage;			//마지막 페이지 
+  private boolean prev, next;	//이전, 다음 
 
-  private int total;
+  private int total;			//전체 페이지 
   private Criteria cri;
 
+  //생성자 
   public PageDTO(Criteria cri, int total) {
-
     this.cri = cri;
     this.total = total;
     
@@ -26,6 +26,9 @@ public class PageDTO {
     //실제 끝페이지
     int realEnd = (int) (Math.ceil((total * 1.0) / cri.getAmount()));
     //끝 페이지 조건
+    //삼항 연산자 
+    //this.endPage = realEnd <= endPage? realEnd : endPage;
+    
     if (realEnd <= this.endPage) {
       this.endPage = realEnd;
     }

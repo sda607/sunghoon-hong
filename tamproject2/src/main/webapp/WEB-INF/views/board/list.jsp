@@ -33,9 +33,11 @@
                                 <tbody>
                                 <c:forEach items="${list}" var="board">
                                     <tr class="odd gradeX">
-                                        <td><c:out value="${board.bno}"/></td>
-                                        <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
-                                        <c:out value="${board.title}"/></a></td>
+                                        <td><c:out value="${board.bno}" /></td>
+                                        <td><a class='move' href='<c:out value="${board.bno}"/>'>
+											<c:out value="${board.title}" />
+										</a></td>
+										
                                         <td><c:out value="${board.writer}"/></td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}"/></td>
@@ -61,33 +63,32 @@
                        			<button class="btn btn-default">Search</button>
                        		</form>
                        		
-                       	
+                       		<!-- 페이징 처리  -->
                        		<div class='pull-right'>
                        			<ul class="pagination">
-                       				<c:if test="${pageMaker.prev}">
-	                       			<li class="page-item">
-	                       				<a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">Previous</a>
-									 </li>
-									 </c:if>
-                       				<c:forEach begin="${pageMaker.startPage}" 
-                       							end="${pageMaker.endPage}" var="num">
-                       					<li class="page-item ${pageMaker.cri.pageNum == num?"active":""} ">
-                       					  <a class="page-link" href="${num}">${num}</a>
-                       					</li>	
-                       				</c:forEach>	
-                       				<c:if test="${pageMaker.next}">
-                       				<li class="page-item">
-                       				<a class="page-link" href="${pageMaker.endPage +1}" tabindex="-1">NEXT</a>
-									</li>
+	                       				<c:if test="${pageMaker.prev}">
+									<li class="paginate_button previous"><a
+											href="${pageMaker.startPage -1}">Previous</a></li>
 									</c:if>
+			
+									<c:forEach var="num" begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}">
+										<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+											<a href="${num}">${num}</a>
+										</li>
+									</c:forEach>
+			
+									<c:if test="${pageMaker.next}">
+										<li class="paginate_button next"><a
+											href="${pageMaker.endPage +1 }">Next</a></li>
+									</c:if>
+                       			
+                       			
                        			</ul>
                        		</div> 
                        		
-                       		<!--  페이지 번호 클릭하면 form를 submit으로 날려버
-                       		why form ? - 검색조건이 많이 붙었을 때 그때마다 관련된 링크들을전부 수정해야함 
-                       		이동할때의 케이스 (조회할때, 페이지 번호, 검색할때 ))다양하기 때문에 form태그를 이용
-                       		단점은 자바스크립트가동작하지 않으면 정상적으로 동작 할 수 없음   -->
-                       		<!-- 페이지ㅣ 처리와 검색 전송  -->
+                       		
+                       		<!-- 페이지 처리와 검색 전송  -->
                        		<form id="actionForm" action="/board/list" method="get">
                        			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                        			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -127,79 +128,84 @@
 			  </div>
 			</div>
           	
-          <script>
-          	$(document).ready(function(){
-          		//재전송(redirect)처리 
-          		var result = '<c:out value="${result}"/>';
-          		
-          		checkModal(result);
-          		
-          		history.replaceState({}, null, null);
-          		
-          		//모달(Modal)창 보여주기 - 목록에서 버튼으로 이동하기  
-          		function checkModal(result){
-          			
-          			if(result === '' || history.state){
-          				return;
-          			}
-          			
-          			if(parseInt(result) > 0){
-          				$(".modal-body").html(
-       						"게시글 " + parseInt(result) + " 번이 등록되었습니다.");
-          			}
-          			
-          			$("#myModal").modal("show");
-          			
-          		}
-          		
-          		$("#regBtn").on("click", function(){
-          			self.location = "/board/register";
-          		});
-          		
-          		
-          		var actionForm = $("#actionForm");
-          		//페이지 이동  
-          	
-          		$(".page-link").on("click", function(e){
-          			
-          			e.preventDefault();
-          			
-          			var targetPage = $(this).attr("href");
-          			
-          			console.log(targetPage);
-          			
-          			actionForm.find("input[name='pageNum']").val(targetPage);
-          			actionForm.submit();
-          			
-          		});
-          		//상세 페이지로 전송 
-          		$(".move").on("click", function(e){
-          			e.preventDefault();
-          			
-          			var targetBno = $(this).attr("href");
-          			
-          			console.log(targetBno);
-          			
-          			actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>'");
-          			actionForm.attr("action", "/board/get").submit();
-          			
-          		});
-          		
-          		//검색 폼 처리
-          		var searchForm = $("#searchForm");
-          		
-          		$("#searchForm button").on("click", function(e){
-          			
-          			e.preventDefault();
-          			console.log("click......");
-          			
-          			searchForm.find("input[name='pageNum']").val(1);	//1	페이지부터 검색  
-          			
-          			searchForm.submit();
-          			
-          		});
-          		
-          	});
-          </script>
-           
-     <%@ include file="../includes/footer.jsp" %>
+<script>
+		$(document).ready(function(){
+			//재전송(redirect)처리 
+			var result = '<c:out value="${result}"/>';
+			
+			checkModal(result);
+			
+			history.replaceState({}, null, null);
+			
+			//모달(Modal)창 보여주기 - 목록에서 버튼으로 이동하기  
+			function checkModal(result){
+				
+				if(result === '' || history.state){
+					return;
+				}
+				
+				if(parseInt(result) > 0){
+					$(".modal-body").html(
+				"게시글 " + parseInt(result) + " 번이 등록되었습니다.");
+				}
+				
+				$("#myModal").modal("show");
+				
+			}
+			
+			$("#regBtn").on("click", function(){
+				self.location = "/board/register";
+			});
+			
+			
+			var actionForm = $("#actionForm");
+			
+			//페이지 이동  
+			$(".paginate_button a").on(
+								"click",
+								function(e) {
+
+									e.preventDefault();
+
+									console.log('click');
+
+									actionForm.find("input[name='pageNum']")
+											.val($(this).attr("href"));
+									actionForm.submit();
+								});
+			
+			//게시물 조회를 위한 이벤트 처리 추 
+			$(".move").on(
+								"click",
+								function(e) {
+
+									e.preventDefault();
+									actionForm
+											.append("<input type='hidden' name='bno' value='"
+													+ $(this).attr(
+															"href")
+													+ "'>");
+									actionForm.attr("action",
+											"/board/get");
+									actionForm.submit();
+
+								});
+			
+			//검색 폼 처리
+			var searchForm = $("#searchForm");
+			
+			$("#searchForm button").on("click", function(e){
+				
+				e.preventDefault();
+				console.log("click......");
+				
+				searchForm.find("input[name='pageNum']").val(1);	//1	페이지부터 검색  
+				
+				searchForm.submit();
+				
+			});
+			
+		});
+</script>
+ 
+<%@ include file="../includes/footer.jsp" %>
