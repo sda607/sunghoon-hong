@@ -33,21 +33,15 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 
+	
 	@GetMapping("/register")
 	public void registerGET() {
 
 	}
-
-	
-	/*@GetMapping("/list")
-	public void list(Model model) {
-	
-	log.info("list");
-	model.addAttribute("list", service.getList());
-	}*/
-
-	//글 목록 보기 
-	//기존 BoardController의 list()는 아무런 파라미터 없이 처리되었기 때문애 pageNum과 amount를 처리하기 위해 수정
+	/**
+	 *글 목록 보기 
+	 *기존 BoardController의 list()는 아무런 파라미터 없이 처리되었기 때문애 pageNum과 amount를 처리하기 위해 수정
+	 */
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 
@@ -74,7 +68,6 @@ public class BoardController {
 
 		return "redirect:/board/list";	//'redirect:' 스프링MVC가 내부적으로 response.sendRedirect()처리해 주기 때문에 편리 
 	}
-
 
 	//글 조회 및 수정  
 	@GetMapping({ "/get", "/modify" })

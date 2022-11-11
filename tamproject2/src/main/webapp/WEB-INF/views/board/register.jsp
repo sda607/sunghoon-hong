@@ -19,12 +19,11 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <h1>Board Register</h1>
+                          <h1>Board Register</h1>	<!--<form>태그를 이용해서 필요한 데이터를 전송  -->
                        		<form action="/board/register" method="post">
-                       		
                        			<div class="form-group">
                                     <label>Title</label>
-                                    <input class="form-control" name="title">
+                                    <input class="form-control" name="title"><!--name 속성은 BoardVO 클래스의 변수와 일치  -->
                                 </div>
                                 
                        			<div class="form-group">

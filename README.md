@@ -4,14 +4,14 @@
 </br>
 
 ## 1.제작 기간 & 참여 인원
-* 2022년 09월 ~ 09월16일
-* 팀프로젝트
+* 2022년 9월 1일 ~ 9월16일
+* 팀프로젝트 / 2명
 
 </br>
 
 ## 2.사용 기술
 * Java 8
-* Spring
+* Spring 5.2
 * MySQL
 
 </br>
@@ -33,10 +33,24 @@
 
 ### 4.2 사용자 요청
 
-### 
+### 4.3 Controller
+
+![BoardController의 분석](./controller%EA%B3%84%EC%B8%B5%EA%B5%AC%EC%A1%B0.jpeg)
+- **CRUD 처리** :pushpin: [코드 확인](https://github.com/sda607/sunghoon-hong/blob/3967e8742641962dd29ff88e7516fcecf15f32a1/tamproject2/src/main/java/com/spring/controller/BoardController.java)
+
+- **목록 화면 처리** :pushpin: [코드 확인]()
+
 </div>
 </details>
 
+
+
+
 ## 5.핵심 트러블 슈팅
-</br>
-###5.1 페이징 처리 문제
+- **목록 페이지와 뒤로 가기 문제** :pushpin: [코드 확인]()
+
+### 5.1 페이징 처리 문제
+
+
+## 6.그 외 이슈사항
+
