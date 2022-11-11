@@ -53,4 +53,15 @@
 
 
 ## 6.그 외 이슈사항
+<details>
+<summary>한글 문제와 UTF-8 필터 처리</summary>
+<div markdown="1">
+1.브라우저에서 한글이 꺠져서 전송되는지 확인
 
+2.문제가 없다면 스프링 MVC 쪽에서 한글을 처리하는 필터를 등록
+![web.xml을 이용할 때의 UTF-8 필터](./UTF-8.png)
+
+
+
+</div>
+</details>
