@@ -88,11 +88,11 @@
                        		</div> 
                        		
                        		
-                       		<!-- 페이지 처리와 검색 전송  -->
+                       		<!-- 페이지 처리(get 방식)와 검색 전송  -->
                        		<form id="actionForm" action="/board/list" method="get">
                        			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                        			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                       			<input type="hidden" name="type" value="${pageMaker.cri.type}">
+                       			<input type="hidden" name="type" value= "${pageMaker.cri.type}">
                        			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                        		</form>
                        		
@@ -196,10 +196,21 @@
 			
 			$("#searchForm button").on("click", function(e){
 				
-				e.preventDefault();
-				console.log("click......");
+				if(!searchForm.find("option:selected").val()){
+					alert("검색종류를 선택하세요 ");
+					return false;
+					
+				}
+				
+				if(!searchForm.find("input[name='keyword']").val()){
+					alert("키워드를 입력하세요 ");
+					return false;
+					
+				}
+				
 				
 				searchForm.find("input[name='pageNum']").val(1);	//1	페이지부터 검색  
+				e.preventDefault();
 				
 				searchForm.submit();
 				

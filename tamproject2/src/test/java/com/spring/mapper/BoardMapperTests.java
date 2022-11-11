@@ -108,14 +108,14 @@ public class BoardMapperTests {
 	  public void testSearchPaging() {
 
 	    Criteria cri = new Criteria();
-	    cri.setKeyword("test");
+	    cri.setKeyword("spring");
 	    cri.setType("T");
 
 	    List<BoardVO> list = mapper.getListWithPaging(cri);
 
 	  /*  list.stream()
 	    .map(board -> board.getBno())		//글번호 매
-	    .forEach(board -> log.info(board));	//전체 데이터 출*/
+	    .forEach(board -> log.info(board));	//전체 데이터 출력 */
 	    list.forEach(board  -> log.info(board));
 	  }
 

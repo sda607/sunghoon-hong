@@ -67,11 +67,7 @@
 		#{bno}
 	</update>
 
-	<!-- <select id="getListWithPaging" resultType="org.zerock.domain.BoardVO"> 
-		<![CDATA[ select bno, title, content, writer, regdate, updatedate from ( 
-		select /*+INDEX_DESC(tbl_board pk_board) */ rownum rn, bno, title, content, 
-		writer, regdate, updatedate from tbl_board where rownum <= #{pageNum} * #{amount} 
-		) where rn > (#{pageNum} -1) * #{amount} ]]> </select> -->
+	
 
 	<!-- 검색을 하게 되면 totalcount의 개수도 바뀌게 된다   -->
 	<select id="getListWithPaging" resultType="com.spring.domain.BoardVO">
@@ -105,17 +101,6 @@
 		select count(bno) from tam_board where   
 		<include refid="criteria"></include>
 		bno > 0		
-	</select>
-
-	<select id="searchTest" resultType="com.spring.domain.BoardVO">
-		<![CDATA[ 
-			select * froma tam_board
-			where
-		]]>
-		
-		<![CDATA[ 
-		rownum < 10
-		]]>
 	</select>
 
 

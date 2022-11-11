@@ -24,7 +24,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/board/*")
-@AllArgsConstructor
+@AllArgsConstructor 	//생성자를 만들고 자동으로 주입
 public class BoardController {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class BoardController {
 	model.addAttribute("list", service.getList());
 	}*/
 
-	
+	//글 목록 보기 
 	//기존 BoardController의 list()는 아무런 파라미터 없이 처리되었기 때문애 pageNum과 amount를 처리하기 위해 수정
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
@@ -62,24 +62,24 @@ public class BoardController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 
 	}
-	
+	//글 등록 
 	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
-
+	public String register(BoardVO board, RedirectAttributes rttr) {//RedirectAttributes를 파라미터로 지정 -> 등록 작업이 끝난 후 다시 목록 화면으로 이동하기 위함 
+		//추가적으로 새롭게 등록된 게시글의 번호를 같이 전달하기 위해서 RedirectAttributes를 이용 
 		log.info("register: " + board);
 
 		service.register(board);
 
 		rttr.addFlashAttribute("result", board.getBno());
 
-		return "redirect:/board/list";
+		return "redirect:/board/list";	//'redirect:' 스프링MVC가 내부적으로 response.sendRedirect()처리해 주기 때문에 편리 
 	}
 
 
-	
+	//글 조회 및 수정  
 	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-
+		//
 		log.info("/get or modify");
 		model.addAttribute("board", service.get(bno));
 	}
@@ -93,7 +93,7 @@ public class BoardController {
 	// }
 	// return "redirect:/board/list";
 	// }
-
+	//글 수정 
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("modify:" + board);
@@ -120,7 +120,7 @@ public class BoardController {
 	// }
 	// return "redirect:/board/list";
 	// }
-
+	//글 삭제 
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
 

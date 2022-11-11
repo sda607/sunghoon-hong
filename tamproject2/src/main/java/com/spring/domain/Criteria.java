@@ -14,9 +14,9 @@ public class Criteria {
   private int amount;	//페이지당 게시글 수 
   
   private String type;  //t, tc, tcw, cw
-  private String keyword;
+  private String keyword;//검색어 
 
-  public Criteria() {
+  public Criteria() {	//또 다른 생성자 호출 (배열, 맵으로 구현 )
     this(1, 10);
   }
 
