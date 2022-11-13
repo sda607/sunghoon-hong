@@ -66,24 +66,23 @@
                        		<!-- 페이징 처리  -->
                        		<div class='pull-right'>
                        			<ul class="pagination">
-	                       				<c:if test="${pageMaker.prev}">
-									<li class="paginate_button previous"><a
-											href="${pageMaker.startPage -1}">Previous</a></li>
-									</c:if>
-			
-									<c:forEach var="num" begin="${pageMaker.startPage}"
-										end="${pageMaker.endPage}">
-										<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-											<a href="${num}">${num}</a>
-										</li>
-									</c:forEach>
-			
-									<c:if test="${pageMaker.next}">
-										<li class="paginate_button next"><a
-											href="${pageMaker.endPage +1 }">Next</a></li>
-									</c:if>
-                       			
-                       			
+						<c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous"><a
+									href="${pageMaker.startPage -1}">Previous</a></li>
+							</c:if>
+
+							<c:forEach var="num" begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}">
+								<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+									<a href="${num}">${num}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next}">
+								<li class="paginate_button next"><a
+									href="${pageMaker.endPage +1 }">Next</a></li>
+							</c:if>
+
                        			</ul>
                        		</div> 
                        		
@@ -162,34 +161,34 @@
 			
 			//페이지 이동  
 			$(".paginate_button a").on(
-								"click",
-								function(e) {
+					"click",
+					function(e) {
 
-									e.preventDefault();
+						e.preventDefault();
 
-									console.log('click');
+						console.log('click');
 
-									actionForm.find("input[name='pageNum']")
-											.val($(this).attr("href"));
-									actionForm.submit();
-								});
+						actionForm.find("input[name='pageNum']")
+								.val($(this).attr("href"));
+						actionForm.submit();
+					});
 			
 			//게시물 조회를 위한 이벤트 처리 추 
 			$(".move").on(
-								"click",
-								function(e) {
+					"click",
+					function(e) {
 
-									e.preventDefault();
-									actionForm
-											.append("<input type='hidden' name='bno' value='"
-													+ $(this).attr(
-															"href")
-													+ "'>");
-									actionForm.attr("action",
-											"/board/get");
-									actionForm.submit();
+						e.preventDefault();
+						actionForm
+								.append("<input type='hidden' name='bno' value='"
+										+ $(this).attr(
+												"href")
+										+ "'>");
+						actionForm.attr("action",
+								"/board/get");
+						actionForm.submit();
 
-								});
+					});
 			
 			//검색 폼 처리
 			var searchForm = $("#searchForm");
