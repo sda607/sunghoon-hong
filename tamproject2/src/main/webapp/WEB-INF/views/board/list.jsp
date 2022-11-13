@@ -34,14 +34,12 @@
                                 <c:forEach items="${list}" var="board">
                                     <tr class="odd gradeX">
                                         <td><c:out value="${board.bno}" /></td><!-- 조회 페이지로 이동한 후 다시 목록으로 돌아가면 다시 1페이지의 상태로 돌아가는 문제
-																					현재 목록페이지의 pageNum과 amount를 같이 전달
-																					<form>태그에 추가로 게시물의 번호를 같이 전송하고, action 값을 조정
-																					<a>태그에는 이동하려는 게시물의 번호만을 가지게 수정
-																					(이벤트 처리하기 위해서 <a>태그 class 속성 부여 ) -->
+										현재 목록페이지의 pageNum과 amount를 같이 전달
+										<form>태그에 추가로 게시물의 번호를 같이 전송하고, action 값을 조정
+										<a>태그에는 이동하려는 게시물의 번호만을 가지게 수정
+										(이벤트 처리하기 위해서 <a>태그 class 속성 부여 ) -->
                                         <td><a class='move' href='<c:out value="${board.bno}"/>'>
-											<c:out value="${board.title}" />
-										</a></td>
-										
+					<c:out value="${board.title}" /></a></td>
                                         <td><c:out value="${board.writer}"/></td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}"/></td>
