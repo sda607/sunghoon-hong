@@ -47,10 +47,10 @@
                                  </c:forEach>
                                 </tbody>
                             </table>
-                         
+                         	<!--페이지 번호가 파라미터로 유지되었던 것처럼 검색 조건과 키워드 역시 항상 화면 이동 시 같이 전송 되어야 함-->
                        		<form id="searchForm" action="/board/list" method="get">
                        			<select name="type">		<!-- 검색조건과 키워드 보여주는 부분  -->
-                       			  <option value="" ${pageMaker.cri.type == null?"selected":"" } >---</option> 
+                       			  <option value="" ${pageMaker.cri.type == null?"selected":"" } >---</option> <!--<select> 태그의 내부는 삼항 연산자를 이용해서 해당 조건으로 검색되었다면 ‘selected’라는 문자열을 출력하게 해서 화면에서 선택된 항목으로 보이도록 함-->
                        			  <option value="T" ${pageMaker.cri.type eq 'T'?"selected":"" } >제목</option>
                        			  <option value="C" ${pageMaker.cri.type eq 'C'?"selected":"" } >내용</option>
                        			  <option value="W" ${pageMaker.cri.type eq 'W'?"selected":"" } >작성자</option>
@@ -74,7 +74,7 @@
 							<c:forEach var="num" begin="${pageMaker.startPage}"
 								end="${pageMaker.endPage}">
 								<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-									<a href="${num}">${num}</a>
+									<a href="${num}">${num}</a><!--<a>태그의 href 속성값으로 페이지 번호를 가지도록 수정 (번호의 출력은 가독성의 문제로 EL 이용)-->
 								</li>
 							</c:forEach>
 
@@ -88,6 +88,7 @@
                        		
                        		
                        		<!-- 페이지 처리(get 방식)와 검색 전송  -->
+				<!--실제 페이지를 클릭하면 <form>태그를 이용해서 처리-->
                        		<form id="actionForm" action="/board/list" method="get">
                        			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                        			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -157,19 +158,20 @@
 			});
 			
 			
-			var actionForm = $("#actionForm");
+			var actionForm = $("#actionForm");//actionForm 자체를 submit() 시킴
 			
 			//페이지 이동  
+			//<form>태그를 추가해서 URL의 이동을 처리하도록 변경
 			$(".paginate_button a").on(
 					"click",
 					function(e) {
 
-						e.preventDefault();
+						e.preventDefault();//<a>태그를 클릭해도 페이지 이동 없도록 **preventDefault()**처리
 
 						console.log('click');
 
 						actionForm.find("input[name='pageNum']")
-								.val($(this).attr("href"));
+								.val($(this).attr("href"));//<form> 태그 내 pageNum 값은 href 속성값으로 변경
 						actionForm.submit();
 					});
 			
@@ -195,7 +197,7 @@
 			//검색 폼 처리
 			var searchForm = $("#searchForm");
 			
-			$("#searchForm button").on("click", function(e){
+			$("#searchForm button").on("click", function(e){//검색 버튼을 클릭하면 검색은 1페이지를 하도록 수정하고
 				
 				if(!searchForm.find("option:selected").val()){
 					alert("검색종류를 선택하세요 ");
@@ -203,14 +205,14 @@
 					
 				}
 				
-				if(!searchForm.find("input[name='keyword']").val()){
+				if(!searchForm.find("input[name='keyword']").val()){//화면에 검색 조건과 키워드가 보이게 처리하는 작업 우선
 					alert("키워드를 입력하세요 ");
 					return false;
 					
 				}
 				
 				
-				searchForm.find("input[name='pageNum']").val(1);	//1	페이지부터 검색  
+				searchForm.find("input[name='pageNum']").val(1);	//1페이지부터 검색  
 				e.preventDefault();
 				
 				searchForm.submit();
