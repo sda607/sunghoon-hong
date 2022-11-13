@@ -12,13 +12,9 @@
 ## 2.사용 기술
 * Java 8
 * Spring 5.2
-<<<<<<< HEAD
-* MySQL
-
-=======
 * Oracle 
 * MyBatis
->>>>>>> fe22a9fc5f901f1ea81b5f919d26d84eb7239abc
+
 </br>
 
 ## 3.ERD 설계
