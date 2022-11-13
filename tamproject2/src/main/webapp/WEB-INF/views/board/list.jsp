@@ -33,7 +33,11 @@
                                 <tbody>
                                 <c:forEach items="${list}" var="board">
                                     <tr class="odd gradeX">
-                                        <td><c:out value="${board.bno}" /></td>
+                                        <td><c:out value="${board.bno}" /></td><!-- 조회 페이지로 이동한 후 다시 목록으로 돌아가면 다시 1페이지의 상태로 돌아가는 문제
+																					현재 목록페이지의 pageNum과 amount를 같이 전달
+																					<form>태그에 추가로 게시물의 번호를 같이 전송하고, action 값을 조정
+																					<a>태그에는 이동하려는 게시물의 번호만을 가지게 수정
+																					(이벤트 처리하기 위해서 <a>태그 class 속성 부여 ) -->
                                         <td><a class='move' href='<c:out value="${board.bno}"/>'>
 											<c:out value="${board.title}" />
 										</a></td>
@@ -45,9 +49,7 @@
                                  </c:forEach>
                                 </tbody>
                             </table>
-                           <!--   <td><a class='move' href='<c:out value="${board.bno}" />'><c:out value="${board.title}" /></a></td>-->
-                                	<!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-                            <!-- /.table-responsive -->
+                         
                        		<form id="searchForm" action="/board/list" method="get">
                        			<select name="type">		<!-- 검색조건과 키워드 보여주는 부분  -->
                        			  <option value="" ${pageMaker.cri.type == null?"selected":"" } >---</option> 
