@@ -31,9 +31,9 @@ public class ReplyController {
 	
 	//등록 작업과 테스트 
 	@PostMapping(value = "/new", 
-			consumes = "application/json",
+			consumes = "application/json",		 //consumes와 produces를 이용해서 JSON방식의 데이터만 처리 
 			produces = {MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
+	public ResponseEntity<String> create(@RequestBody ReplyVO vo){//create()는 @RequestBody를 적용해서 JSON데이터를 ReplyVO 타입으로 변환 
 		
 		log.info("ReplyVO: " + vo);
 		
