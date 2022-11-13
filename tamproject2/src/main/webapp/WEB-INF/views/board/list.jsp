@@ -173,7 +173,9 @@
 						actionForm.submit();
 					});
 			
-			//게시물 조회를 위한 이벤트 처리 추 
+			//게시물 조회를 위한 이벤트 처리 추가
+			//<form> 태그에 추가로 bno 값을 전송하기 위해서 <input> 태그를 만들어 추가하고
+			//<form> 태그의 action은 "/board/get"으로 변경
 			$(".move").on(
 					"click",
 					function(e) {
