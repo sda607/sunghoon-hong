@@ -44,7 +44,7 @@ public class BoardController {
 	 */
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-
+		//Criteria 클래스를 만들어 두면 편하게 하나의 타입만으로 파라미터나 리턴 타입을 사용 할 수 있어 편리함
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, 123));
@@ -52,7 +52,7 @@ public class BoardController {
 		int total = service.getTotal(cri);
 
 		log.info("total: " + total);
-
+		//list()는 "pageMaker"라는 이름으로 PageDTO클래스에서 객체를 만들어서 Model에 담아줌
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 
 	}
@@ -71,24 +71,15 @@ public class BoardController {
 
 	//글 조회 및 수정  
 	@GetMapping({ "/get", "/modify" })
-	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-		//
+	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {//게시물 번호(bno)가 출력 - 모든 데이터가 읽기 전용으로 처리
+
 		log.info("/get or modify");
 		model.addAttribute("board", service.get(bno));
 	}
 
-	// @PostMapping("/modify")
-	// public String modify(BoardVO board, RedirectAttributes rttr) {
-	// log.info("modify:" + board);
-	//
-	// if (service.modify(board)) {
-	// rttr.addFlashAttribute("result", "success");
-	// }
-	// return "redirect:/board/list";
-	// }
 	//글 수정 
 	@PostMapping("/modify")
-	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {//RedirectAttributes 은 URL 뒤에 원래의 페이지로 이동하기 위해서 pageNum과 amount 값을 가지고 이동
 		log.info("modify:" + board);
 
 		if (service.modify(board)) {
@@ -103,16 +94,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 
-	// @PostMapping("/remove")
-	// public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr)
-	// {
-	//
-	// log.info("remove..." + bno);
-	// if (service.remove(bno)) {
-	// rttr.addFlashAttribute("result", "success");
-	// }
-	// return "redirect:/board/list";
-	// }
+	
 	//글 삭제 
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
