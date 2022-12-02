@@ -54,7 +54,7 @@
 ## 4.핵심 트러블 슈팅
 - **목록 페이지와 뒤로 가기 문제** :pushpin: [코드 확인](https://github.com/sda607/sunghoon-hong/blob/33308b4b8b167e3ee4e5c8be845c4d697cc5e159/tamproject2/src/main/webapp/WEB-INF/views/board/list.jsp)
 
-
+<img src= "https://user-images.githubusercontent.com/64462106/205221539-eaf63985-51c7-47c8-b36e-ff43c80e5e24.gif">
 
 ## 5.그 외 이슈사항
 <details>
